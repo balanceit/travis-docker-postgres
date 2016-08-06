@@ -12,7 +12,7 @@ install:
   - psql -c "select table_name from information_schema.tables where table_schema= 'public';" -U postgres -h 127.0.0.1 -p 5432 -d docker_test_developement
 
 before_script:
-  - echo $(CONTAINER_PGHOST)
+  - echo ${CONTAINER_PGHOST}
   - /sbin/ip route|awk '/default/ { print $3 }'
   - docker build -t pgtest .
   - docker run -d -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
