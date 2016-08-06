@@ -1,5 +1,3 @@
-language: bash
-
 services:
   - docker
   - postgresql
@@ -10,8 +8,8 @@ addons:
 sudo: required
 
 install:
-  - psql -c 'create database docker_test_developement;' -U postgres -h localhost -p 5432
-  - psql -c "select table_name from information_schema.tables where table_schema= 'public';" -U postgres -h localhost -p 5432 -d docker_test_developement
+  - psql -c 'create database docker_test_developement;' -U postgres -h 127.0.0.1 -p 5432
+  - psql -c "select table_name from information_schema.tables where table_schema= 'public';" -U postgres -h 127.0.0.1 -p 5432 -d docker_test_developement
 
 before_script:
   - echo $(CONTAINER_PGHOST)
@@ -22,4 +20,4 @@ before_script:
 script:
   - docker ps -a
   - docker logs pgtest
-  - psql -c "select table_name from information_schema.tables where table_schema= 'public';" -U postgres -h localhost -p 5432 -d docker_test_developement
+  - psql -c "select table_name from information_schema.tables where table_schema= 'public';" -U postgres -h 127.0.0.1 -p 5432 -d docker_test_developement
