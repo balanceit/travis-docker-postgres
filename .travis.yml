@@ -18,7 +18,9 @@ before_script:
   - /sbin/ip route|awk '/default/ { print $3 }'
   - docker build -t pgtest .
   - docker run -d -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
+  - sleep 10
   - docker logs pgtest
+  - sleep 10
 
 script:
   - docker ps -a
