@@ -1,5 +1,6 @@
 #!/bin/bash
 ifconfig
+/sbin/ip route
 echo ${PGHOST}
 echo `which psql`
 echo 'ping 172.17.42.1'
