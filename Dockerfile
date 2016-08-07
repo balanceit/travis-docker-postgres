@@ -1,6 +1,7 @@
 FROM ubuntu
 RUN apt-get update && apt-get install -y postgresql-client
 RUN apt-get install -y net-tools
+RUN apt-get install -y nmap
 RUN apt-get install -y traceroute
 RUN apt-get install -y telnet
 ADD ./run.sh ./run.sh
