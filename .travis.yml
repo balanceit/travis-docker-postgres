@@ -12,8 +12,8 @@ before_install:
   - sudo docker --version
   - sudo iptables -L
   - sudo apt-get install -y nmap
-  - sudo apt-get update
-  - sudo apt-get --no-install-recommends --force-yes install docker-engine
+  # - sudo apt-get update
+  # - sudo apt-get --no-install-recommends --force-yes install docker-engine
   - cat /etc/postgresql/main/postgresql.conf
 
 install:
