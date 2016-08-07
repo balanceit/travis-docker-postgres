@@ -2,6 +2,7 @@
 ifconfig
 /sbin/ip route
 echo ${PGHOST}
+echo ${parent-host}
 echo `which psql`
 echo 'before first select, should have from_travis table'
 psql --version
