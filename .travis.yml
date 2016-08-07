@@ -22,9 +22,8 @@ before_script:
   - ifconfig
   - ifconfig en0 inet
   - docker build -t pgtest .
-  - docker run --rm -it -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
+  - docker run --rm -it --add-host=parent-host:`ip route show | grep docker0 | awk '{print \$9}'` -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
   - sleep 10
-  - docker run --rm -it -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
   - docker logs pgtest
   - sleep 10
 

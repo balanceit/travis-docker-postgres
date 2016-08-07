@@ -11,3 +11,4 @@ psql -c "select 1;" -U postgres -h localhost -p 5432 -d docker_test_developement
 psql -c "select 1;" -U postgres -h 127.0.0.1 -p 5432 -d docker_test_developement --echo-all --echo-errors
 psql -c "select 1;" -U postgres -h 10.0.3.1 -p 5432 -d docker_test_developement --echo-all --echo-errors
 psql -c "select 1;" -U postgres -h 172.17.0.5 -p 5432 -d docker_test_developement --echo-all --echo-errors
+psql -c "select 1;" -U postgres -h parent-host -p 5432 -d docker_test_developement --echo-all --echo-errors
