@@ -8,9 +8,10 @@ addons:
 sudo: required
 
 before_install:
+  - sudo docker --version
   - sudo iptables -L
   - sudo apt-get update
-  - sudo apt-get install docker-engine
+  - sudo apt-get install -y docker-engine
   - sudo iptables -L
 
 install:
