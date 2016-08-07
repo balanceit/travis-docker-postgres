@@ -18,12 +18,13 @@ before_script:
   - /sbin/ip route|awk '/default/ { print $3 }'
   - /sbin/ip route show 0.0.0.0/0 | grep -Eo 'via \S+' | awk '{ print $2 }'
   - /sbin/ip route get 1.1.1.1 | grep -Eo 'via \S+' | awk '{ print $2 }'
-  - /sbin/ip route 
+  - /sbin/ip route
   - ifconfig
   - ifconfig en0 inet
   - docker build -t pgtest .
   - docker run --rm -it -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
   - sleep 10
+  - docker run --rm -it -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
   - docker logs pgtest
   - sleep 10
 
