@@ -8,8 +8,10 @@ addons:
 sudo: required
 
 before_install:
+  - sudo iptables -L
   - sudo apt-get update
   - sudo apt-get install docker-engine
+  - sudo iptables -L
 
 install:
   - psql -c 'create database docker_test_developement;' -U postgres -h 127.0.0.1 -p 5432
