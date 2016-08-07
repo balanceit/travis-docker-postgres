@@ -18,7 +18,7 @@ before_script:
   - /sbin/ip route|awk '/default/ { print $3 }'
   - /sbin/ip route show 0.0.0.0/0 | grep -Eo 'via \S+' | awk '{ print $2 }'
   - /sbin/ip route get 1.1.1.1 | grep -Eo 'via \S+' | awk '{ print $2 }'
-  - /sbin/ip route show | grep docker0 | awk '{print \$9}'
+  - /sbin/ip route show | grep docker0 | awk '{print $9}'
   - /sbin/ip route
   - ifconfig
   - ifconfig en0 inet
