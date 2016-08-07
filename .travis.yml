@@ -25,6 +25,7 @@ before_script:
   - docker build -t pgtest .
   - docker run --rm -it --add-host=parent-host:`ip route show | grep docker0 | awk '{print \$9}'` -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
   - sleep 10
+  - docker run --rm -it --net=host --log-driver json-file --name pgtest pgtest
   - docker logs pgtest
   - sleep 10
 
