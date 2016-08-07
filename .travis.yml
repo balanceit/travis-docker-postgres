@@ -16,7 +16,7 @@ before_install:
   # - sudo apt-get --no-install-recommends --force-yes install docker-engine
   - sudo ls /etc
   - sudo ls /etc/postgresql
-  - cat /etc/postgresql/9.*/main/postgresql.conf
+  - cat /etc/postgresql/9.4/main/postgresql.conf
 
 install:
   - psql -c 'create database docker_test_developement;' -U postgres -h 127.0.0.1 -p 5432
