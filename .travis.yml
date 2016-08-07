@@ -16,7 +16,10 @@ install:
 before_script:
   - echo ${CONTAINER_PGHOST}
   - /sbin/ip route|awk '/default/ { print $3 }'
+  - ip route show 0.0.0.0/0 | grep -Eo 'via \S+' | awk '{ print $2 }'
+  - ip route get 1.1.1.1 | grep -Eo 'via \S+' | awk '{ print $2 }'
   - ifconfig
+  - ifconfig en0 inet
   - docker build -t pgtest .
   - docker run --rm -it -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
   - sleep 10
