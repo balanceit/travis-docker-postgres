@@ -1,52 +1,9 @@
 language: ruby
 services:
   - docker
-  - postgresql
-
-addons:
-  postgresql: "9.4"
 
 sudo: required
 
 before_install:
+  - sudo docker login -u="$DOCKER_HUB_USER" -p="$DOCKER_HUB_PASS";
   - sudo docker --version
-  - sudo iptables -L
-  - sudo apt-get install -y nmap
-  # - sudo apt-get update
-  # - sudo apt-get --no-install-recommends --force-yes install docker-engine
-  - sudo ls /etc
-  - sudo ls /etc/postgresql
-  - sudo ls /etc/postgresql/9.4/main/
-  - sudo cat /etc/postgresql/9.4/main/postgresql.conf
-  - sudo cat /etc/postgresql/9.4/main/pg_hba.conf
-  - echo "listen_addresses = '*'" | sudo tee -a /etc/postgresql/9.4/main/postgresql.conf
-  - echo "host all all 0.0.0.0/0 md5" | sudo tee -a /etc/postgresql/9.4/main/pg_hba.conf
-  - sudo service postgresql restart
-
-install:
-  - psql -c 'create database docker_test_developement;' -U postgres -h 127.0.0.1 -p 5432
-  - psql -c "select table_name from information_schema.tables where table_schema= 'public';" -U postgres -h 127.0.0.1 -p 5432 -d docker_test_developement
-  - psql -c "create table from_travis (currenttime timestamp not null default current_timestamp);" -U postgres -h 127.0.0.1 -p 5432 -d docker_test_developement
-  - psql -c "select table_name from information_schema.tables where table_schema= 'public';" -U postgres -h 127.0.0.1 -p 5432 -d docker_test_developement
-
-before_script:
-  - echo ${CONTAINER_PGHOST}
-  - /sbin/ip route|awk '/default/ { print $3 }'
-  - /sbin/ip route show 0.0.0.0/0 | grep -Eo 'via \S+' | awk '{ print $2 }'
-  - /sbin/ip route get 1.1.1.1 | grep -Eo 'via \S+' | awk '{ print $2 }'
-  - /sbin/ip route show | grep docker0 | awk '{print $9}'
-  - /sbin/ip route
-  - ifconfig
-  - ifconfig en0 inet
-  - sudo iptables -L
-  - docker build -t pgtest .
-
-script:
-  - docker run --rm -it --add-host=parent-host:`ip route show | grep docker0 | awk '{print \$9}'` -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
-  # - sleep 10
-  # - docker run --rm -it --net=host --log-driver json-file --name pgtest pgtest
-  # - docker logs pgtest
-  # - sleep 10
-  # - docker ps -a
-  # - docker logs pgtest
-  # - psql -c "select table_name from information_schema.tables where table_schema= 'public';" -U postgres -h 127.0.0.1 -p 5432 -d docker_test_developement
