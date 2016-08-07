@@ -22,6 +22,7 @@ before_script:
   - /sbin/ip route
   - ifconfig
   - ifconfig en0 inet
+  - iptables -L
   - docker build -t pgtest .
 
 script:
