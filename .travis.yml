@@ -5,5 +5,5 @@ services:
 sudo: required
 
 before_install:
-  - sudo docker login -e="$DOCKER_EMAIL" -p="$DOCKER_PASSWORD" 
+  - sudo docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" 
   - sudo docker --version
