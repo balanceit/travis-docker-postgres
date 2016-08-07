@@ -1,4 +1,5 @@
 #!/bin/bash
+ifconfig
 echo ${PGHOST}
 echo `which psql`
 echo 'before first select, should have from_travis table'

@@ -16,6 +16,7 @@ install:
 before_script:
   - echo ${CONTAINER_PGHOST}
   - /sbin/ip route|awk '/default/ { print $3 }'
+  - ifconfig
   - docker build -t pgtest .
   - docker run --rm -it -e PGHOST=${CONTAINER_PGHOST} --log-driver json-file --name pgtest pgtest
   - sleep 10
