@@ -7,6 +7,10 @@ addons:
 
 sudo: required
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install docker-engine
+
 install:
   - psql -c 'create database docker_test_developement;' -U postgres -h 127.0.0.1 -p 5432
   - psql -c "select table_name from information_schema.tables where table_schema= 'public';" -U postgres -h 127.0.0.1 -p 5432 -d docker_test_developement
@@ -22,7 +26,7 @@ before_script:
   - /sbin/ip route
   - ifconfig
   - ifconfig en0 inet
-  - iptables -L
+  - sudo iptables -L
   - docker build -t pgtest .
 
 script:
